@@ -1,0 +1,26 @@
+.pagination-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+.next-button,
+.previous-button {
+  padding: 10px;
+  background-color: rgb(90, 90, 187);
+  color: #fff;
+  text-align: center;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.disabled {
+  background-color: rgb(106, 106, 184);
+}
+
+.page-number {
+  color: #787878;
+  font-size: 0.8rem;
+}
