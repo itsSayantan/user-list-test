@@ -81,7 +81,7 @@ const Home = () => {
       const fn = pd.first_name;
 
       if (typeof fn === "string") {
-        if (fn.startsWith(e.target.value.toString().trim())) {
+        if (fn.startsWith(val)) {
           searchedPageContent.push(pd);
         }
       }
