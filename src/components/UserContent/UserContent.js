@@ -1,6 +1,6 @@
 import React from "react";
 
-const UserContent = React.memo(({ pageContentData }) => {
+const UserContent = React.memo(({ pageContentData, onUserClick }) => {
   let userContent = (
     <tr>
       <td colSpan="4" style={{ padding: "20px 0" }}>
@@ -12,7 +12,7 @@ const UserContent = React.memo(({ pageContentData }) => {
   if (pageContentData instanceof Array && pageContentData.length > 0) {
     userContent = pageContentData.map(p => {
       return (
-        <tr key={p.id}>
+        <tr key={p.id} onClick={() => onUserClick(p.id)}>
           <td>
             <img
               src={p.avatar}

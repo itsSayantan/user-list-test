@@ -3,6 +3,8 @@ import React from "react";
 import UserContent from "../../components/UserContent/UserContent";
 import Pagination from "../../components/Pagination/Pagination";
 import SearchBar from "../../components/SearchBar/SearchBar";
+import Modal from "../../components/Modal/Modal";
+import ProfileCard from "../../components/ProfileCard/ProfileCard";
 
 import "./Home.css";
 
@@ -15,6 +17,13 @@ const Home = () => {
   );
   const [pageContent, setPageContent] = React.useState([]);
   const [tempPageContentBuffer, setTempPageContentBuffer] = React.useState([]);
+  const [modalOpen, setModalOpen] = React.useState(false);
+  const [selectedUser, setSelectedUser] = React.useState({
+    firstName: "",
+    lastName: "",
+    avatar: "",
+    email: ""
+  });
 
   const callUserListApi = pageNumber => {
     fetch("https://reqres.in/api/users?per_page=4&page=" + pageNumber)
@@ -90,6 +99,33 @@ const Home = () => {
     setPageContent(searchedPageContent);
   };
 
+  const handleUserClick = userID => {
+    if (userID) {
+      const l = pageContent.length;
+
+      for (let i = 0; i < l; ++i) {
+        const pd = pageContent[i];
+
+        if (pd.id === userID) {
+          setSelectedUser({
+            firstName: pd.first_name,
+            lastName: pd.last_name,
+            avatar: pd.avatar,
+            email: pd.email
+          });
+          setModalOpen(true);
+
+          break;
+        }
+      }
+    }
+  };
+
+  const handleProfileCardClose = e => {
+    setModalOpen(false);
+    setSelectedUser({ firstName: "", lastName: "", avatar: "", email: "" });
+  };
+
   React.useEffect(() => {
     // call the list users api on component mount
     callUserListApi(page + 1);
@@ -110,7 +146,10 @@ const Home = () => {
             </tr>
           </thead>
           <tbody>
-            <UserContent pageContentData={pageContent} />
+            <UserContent
+              pageContentData={pageContent}
+              onUserClick={handleUserClick}
+            />
           </tbody>
         </table>
       </div>
@@ -123,6 +162,19 @@ const Home = () => {
         onNextClick={handleNextClick}
         onPreviousClick={handlePreviousClick}
       />
+      {modalOpen ? (
+        <Modal>
+          <ProfileCard
+            firstName={selectedUser.firstName}
+            lastName={selectedUser.lastName}
+            avatar={selectedUser.avatar}
+            email={selectedUser.email}
+            onProfileCardClose={handleProfileCardClose}
+          />
+        </Modal>
+      ) : (
+        <></>
+      )}
     </div>
   );
 };
