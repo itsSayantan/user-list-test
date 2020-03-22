@@ -1,0 +1,12 @@
+.search-bar-wrapper {
+  display: flex;
+  justify-content: center;
+  padding: 20px 0;
+}
+
+.search-bar-input {
+  padding: 8px;
+  border-radius: 5px;
+  width: 50%;
+  outline: none;
+}

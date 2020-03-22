@@ -1,7 +1,13 @@
 import React from "react";
 
 const UserContent = React.memo(({ pageContentData }) => {
-  let userContent = <></>;
+  let userContent = (
+    <tr>
+      <td colSpan="4" style={{ padding: "20px 0" }}>
+        No results found
+      </td>
+    </tr>
+  );
 
   if (pageContentData instanceof Array && pageContentData.length > 0) {
     userContent = pageContentData.map(p => {

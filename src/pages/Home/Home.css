@@ -1,5 +1,6 @@
 .home-wrapper {
   position: relative;
+  margin-top: 5%;
   left: 5%;
   width: 90%;
   border: 1px solid #cdcdcd;
@@ -31,7 +32,7 @@
 }
 
 .user-table tbody tr:nth-child(odd) {
-  background-color: #cdcdcd;
+  background-color: #efefef;
 }
 
 .user-table tbody tr:nth-child(even) {
