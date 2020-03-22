@@ -31,7 +31,7 @@ const Home = () => {
       .then(jsonData => {
         setPage(jsonData.page);
         setPageContent(jsonData.data);
-        setTempPageContentBuffer([]);
+        setTempPageContentBuffer(jsonData.data);
         setTotalPages(jsonData.total_pages);
 
         if (jsonData.page === jsonData.total_pages) {
@@ -63,12 +63,13 @@ const Home = () => {
 
   const handleSearchInputChange = e => {
     // if nothing is there in the search bar set the page content to temp page content
-    // empty the temp page content
-    const val = e.target.value.toString().trim();
+    const val = e.target.value
+      .toString()
+      .trim()
+      .toLowerCase();
 
     if (val === "") {
       setPageContent(tempPageContentBuffer);
-      setTempPageContentBuffer([]);
 
       return;
     }
@@ -76,18 +77,21 @@ const Home = () => {
     // if temp page content is empty, set it to actual page content
     // change the page content to be the searched user
 
-    if (
-      tempPageContentBuffer instanceof Array &&
-      tempPageContentBuffer.length === 0
-    )
-      setTempPageContentBuffer(pageContent);
+    // if (
+    //   tempPageContentBuffer instanceof Array &&
+    //   tempPageContentBuffer.length === 0
+    // )
+    //   setTempPageContentBuffer(pageContent);
 
-    const l = pageContent.length;
+    const l = tempPageContentBuffer.length;
 
     const searchedPageContent = [];
     for (let i = 0; i < l; ++i) {
-      const pd = pageContent[i];
-      const fn = pd.first_name;
+      const pd = tempPageContentBuffer[i];
+      const fn = pd.first_name
+        .toString()
+        .trim()
+        .toLowerCase();
 
       if (typeof fn === "string") {
         if (fn.startsWith(val)) {
