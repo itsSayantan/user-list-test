@@ -117,6 +117,7 @@ const Home = () => {
       {/* Pagination area */}
       <Pagination
         currentPage={page}
+        totalPages={totalPages}
         nextButtonDisabled={nextButtonDisabled}
         previousButtonDisabled={previousButtonDisabled}
         onNextClick={handleNextClick}

@@ -5,6 +5,7 @@ import "./Pagination.css";
 const Pagination = React.memo(
   ({
     currentPage,
+    totalPages,
     nextButtonDisabled,
     previousButtonDisabled,
     onNextClick,
@@ -25,7 +26,9 @@ const Pagination = React.memo(
         >
           Previous
         </div>
-        <div className="page-number">Page - {currentPage}</div>
+        <div className="page-number">
+          Page - {currentPage} of {totalPages}
+        </div>
         <div
           className={nextButtonClass}
           onClick={nextButtonDisabled ? () => {} : onNextClick}
